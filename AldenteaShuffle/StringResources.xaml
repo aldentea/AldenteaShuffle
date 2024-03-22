@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="GetHashFromTime">時刻から取得</system:String>
+    <system:String x:Key="GetHashFromID">IDから取得</system:String>
+    <system:String x:Key="TooEarlyMessage">★指定時刻以降のブロックがありません。また後で試してください。</system:String>
+    <system:String x:Key="RetrievedHashMessage" xml:space="preserve">{2:G}にクローズした XRP Ledgerブロック {0} のハッシュ値 {1} を使ってシャッフルを行います。 
+{3} </system:String>
+    <system:String x:Key="FinalizingPlayersMessage">参加エントリーの最終確認です（ID順）。エントリーしたのに名前がない方は、至急お知らせください。</system:String>
+    <system:String x:Key="ShuffledPlayersMessage">シャッフル結果は以下のようになりました。</system:String>
+    <system:String x:Key="SequencesUrlIsHereMessage">取得したランダム順列はこちらから参照できます。</system:String>
+</ResourceDictionary>
+    
