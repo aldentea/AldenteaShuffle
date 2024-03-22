@@ -51,7 +51,7 @@
                                        Text="{Binding EntryList}" MinHeight="100" Grid.Row="1" Grid.Column="0"/>
 
             <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                <Button Content="Sort" HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
+                <Button Content="{StaticResource SortButtonCaption}" HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
                 Command="{Binding SortPlayersCommand}"/>
             </StackPanel>
             <ListBox Margin="10,10,10,10" d:ItemsSource="{d:SampleData ItemCount=5}"
@@ -59,7 +59,7 @@
                 />
 
             <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0">
-                <Button Content="Shuffle" HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
+                <Button Content="{StaticResource ShuffleButtonCaption}" HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
                 Command="{Binding ShufflePlayersCommand}"/>
                 <Button Content="TSV" Margin="10" Command="{Binding GetShuffledPlayersListTSVCommand}" MinWidth="60" MinHeight="36" />
             </StackPanel>

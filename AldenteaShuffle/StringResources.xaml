@@ -3,6 +3,8 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <system:String x:Key="GetHashFromTime">時刻から取得</system:String>
     <system:String x:Key="GetHashFromID">IDから取得</system:String>
+    <system:String x:Key="SortButtonCaption">ソート</system:String>
+    <system:String x:Key="ShuffleButtonCaption">シャッフル</system:String>
     <system:String x:Key="TooEarlyMessage">★指定時刻以降のブロックがありません。また後で試してください。</system:String>
     <system:String x:Key="RetrievedHashMessage" xml:space="preserve">{2:G}にクローズした XRP Ledgerブロック {0} のハッシュ値 {1} を使ってシャッフルを行います。 
 {3} </system:String>
