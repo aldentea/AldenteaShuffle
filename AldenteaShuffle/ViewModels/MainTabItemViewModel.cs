@@ -1,42 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using System.Windows;
-using System.Collections.Immutable;
-using System.Reflection;
-using System.Security.Policy;
 
 namespace Aldentea.AldenteaShuffle.ViewModels
 {
-
-	public partial class MainViewModel : ObservableObject
+	public partial class MainTabItemViewModel : ObservableObject
 	{
-		#region フォントサイズ関連
-
-		[ObservableProperty]
-		public double _fontSize = 16;
-
-		[RelayCommand]
-		void FontSizeUp()
-		{
-			FontSize += 2;
-		}
-
-		[RelayCommand]
-		void FontSizeDown()
-		{
-			FontSize = double.Max(FontSize - 2, 8.0);
-		}
-
-		#endregion
-
-/*
 		#region ユーザエントリー関連
 
 		// これモデル？
@@ -73,7 +47,7 @@ namespace Aldentea.AldenteaShuffle.ViewModels
 		#endregion
 
 
-		public MainViewModel()
+		public MainTabItemViewModel()
 		{
 			var now = DateTime.Now;
 			this._promisedTime = new DateTime(now.Ticks - now.Ticks % (10000000L * 60 * 30) + (10000000L * 60 * 30));
@@ -106,7 +80,7 @@ namespace Aldentea.AldenteaShuffle.ViewModels
 			{
 				SourceHash = hash;
 				var url = $"https://xrpscan.com/ledger/{index}";
-				string message = string.Format((string)Application.Current.FindResource("RetrievedHashMessage"),index, hash, closed_time,url);
+				string message = string.Format((string)Application.Current.FindResource("RetrievedHashMessage"), index, hash, closed_time, url);
 				Clipboard.SetText(message);
 			}
 			else
@@ -196,6 +170,7 @@ namespace Aldentea.AldenteaShuffle.ViewModels
 
 
 		#endregion
-*/
+
+
 	}
 }
