@@ -171,6 +171,13 @@ namespace Aldentea.AldenteaShuffle.ViewModels
 
 		#endregion
 
+		#region Challonge関連
+
+		[ObservableProperty]
+		string _tournamentID = string.Empty;
+
+
+		#endregion
 
 	}
 }
