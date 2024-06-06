@@ -23,6 +23,7 @@
                              Value="{Binding PromisedTime}"/>
             <Button Content="{StaticResource GetHashFromTime}" HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
                 Command="{Binding RetrieveHashCommand}"/>
+            <Label Content="{Binding Message}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <TextBox Margin="10,10,10,10" MinWidth="120" MinHeight="30"
@@ -62,8 +63,8 @@
                     <Button Content="TSV" Margin="10" Command="{Binding GetShuffledPlayersListTSVCommand}" MinWidth="60" MinHeight="36" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <xctk:WatermarkTextBox Margin="10" VerticalContentAlignment="Center" Watermark="トーナメントID" MinWidth="100" />
-                    <Button Content="Challonge" Margin="10" MinWidth="80" MinHeight="36" />
+                    <xctk:WatermarkTextBox Margin="10" VerticalContentAlignment="Center" Watermark="トーナメントID" MinWidth="100" Text="{Binding TournamentID}" />
+                    <Button Content="Challonge" Margin="10" MinWidth="80" MinHeight="36" Command="{Binding ChallongeBulkEntryCommand}"/>
                 </StackPanel>
             </StackPanel>
             <ListBox  Margin="10,10,10,10" d:ItemsSource="{d:SampleData ItemCount=5}"

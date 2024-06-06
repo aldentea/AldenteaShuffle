@@ -96,7 +96,7 @@ namespace Aldentea.AldenteaShuffle.Services
 		*/
 		#endregion
 
-		public async Task BuldAddParticipants(IList<string> participantNames, string tournamentID, string userName, string apiKey)
+		public async Task BulkEntryParticipants(IList<string> participantNames, string tournamentID, string userName, string apiKey)
 		{
 			var base_uri = $@"https://api.challonge.com/v1/tournaments/{tournamentID}/participants/bulk_add.json";
 			var request = new HttpRequestMessage(HttpMethod.Post, base_uri);
@@ -108,7 +108,7 @@ namespace Aldentea.AldenteaShuffle.Services
 
 			// [ { "name":"～～～"}, { "name":"～～～～"} ] みたいな文字列を渡す。
 			var participants_list = string.Join(',', participantNames.Select(p => $@"{{ ""name"": ""{p}""}}"));
-			var json_string = $@"""participants"": [ {participants_list} ]";
+			var json_string = $@"{{""participants"": [ {participants_list} ]}}";
 			request.Content = new StringContent(json_string, Encoding.UTF8, "application/json");
 			var response = await client.SendAsync(request);
 			if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -132,6 +132,7 @@ namespace Aldentea.AldenteaShuffle.Services
 
 	public interface IChallongeWebService
 	{
+		Task BulkEntryParticipants(IList<string> participantNames, string tournamentID, string userName, string apiKey);
 		//Task<IEnumerable<ParticipantItem>> GetParticipants(string tournamentID, string userName, string apiKey);
 		//Task<ParticipantItem> AddParticipant(string participantName, string tournamentID, string userName, string apiKey, string misc = null);
 	}

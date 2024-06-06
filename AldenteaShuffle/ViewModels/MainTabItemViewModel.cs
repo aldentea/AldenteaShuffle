@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Aldentea.AldenteaShuffle.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Immutable;
@@ -11,6 +12,12 @@ namespace Aldentea.AldenteaShuffle.ViewModels
 {
 	public partial class MainTabItemViewModel : ObservableObject
 	{
+
+		static Settings MySettings = App.MySetting;
+
+		[ObservableProperty]
+		string _message = string.Empty;
+
 		#region ユーザエントリー関連
 
 		// これモデル？
@@ -37,11 +44,13 @@ namespace Aldentea.AldenteaShuffle.ViewModels
 		[RelayCommand]
 		private void SortPlayers()
 		{
+			Message = string.Empty;
 			SortedPlayersList = [.. PlayersList.Order()];
 			//SortedPlayersList = [.. PlayersList.Order()];
 			// クリップボードへの積み込みを行う。
 			string message = $"{Application.Current.FindResource("FinalizingPlayersMessage")}\n```\n{string.Join("\n", SortedPlayersList)}\n```";
 			Clipboard.SetText(message);
+			Message = "ソートしました";
 		}
 
 		#endregion
@@ -55,6 +64,8 @@ namespace Aldentea.AldenteaShuffle.ViewModels
 			RetrieveHashCommand = new AsyncRelayCommand(RetrieveHash);
 			//EntryPlayerCommand = new RelayCommand(EntryPlayer, CanEntryPlayer);
 			ShufflePlayersCommand = new AsyncRelayCommand(ShufflePlayers, CanShufflePlayers);
+
+			_challongeWebService = new Services.ChallongeWebService();	// とりあえずDependency Injectionを用いない形で記述する。
 		}
 
 		#region ハッシュ値取得関連
@@ -164,6 +175,7 @@ namespace Aldentea.AldenteaShuffle.ViewModels
 		}
 
 		[ObservableProperty]
+		[NotifyCanExecuteChangedFor(nameof(ChallongeBulkEntryCommand))]
 		[NotifyCanExecuteChangedFor(nameof(GetShuffledPlayersListTSVCommand))]
 		System.Collections.Immutable.ImmutableList<string> _shuffledPlayersList = [];
 
@@ -173,9 +185,33 @@ namespace Aldentea.AldenteaShuffle.ViewModels
 
 		#region Challonge関連
 
+		IChallongeWebService _challongeWebService;
+
+		[NotifyCanExecuteChangedFor(nameof(ChallongeBulkEntryCommand))]
 		[ObservableProperty]
 		string _tournamentID = string.Empty;
 
+		[RelayCommand(CanExecute = nameof(CanChallongeBulkEntry))]
+		async Task ChallongeBulkEntry()
+		{
+			Message = string.Empty;
+			try
+			{
+				await _challongeWebService.BulkEntryParticipants(ShuffledPlayersList, TournamentID, MySettings.ChallongeUser, MySettings.ChallongeApiKey);
+			}
+			catch (Exception ex)
+			{
+				Message = ex.Message;
+			}
+		}
+
+		bool CanChallongeBulkEntry()
+		{
+			return !ShuffledPlayersList.IsEmpty
+				&& !string.IsNullOrWhiteSpace(TournamentID)
+				&& !string.IsNullOrWhiteSpace(MySettings.ChallongeUser)
+				&& !string.IsNullOrWhiteSpace(MySettings.ChallongeApiKey);
+		}
 
 		#endregion
 
