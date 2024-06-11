@@ -19,21 +19,21 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <xctk:DateTimePicker HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="270" MinHeight="36"
+            <xctk:DateTimePicker HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="240" MinHeight="36"
                              Value="{Binding PromisedTime}"/>
             <Button Content="{StaticResource GetHashFromTime}" HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
                 Command="{Binding RetrieveHashCommand}"/>
             <Label Content="{Binding Message}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <TextBox Margin="10,10,10,10" MinWidth="120" MinHeight="30"
+            <TextBox Margin="10,10,10,10" MinWidth="80" MinHeight="30"
                      Text="{Binding BlockIndex}" IsReadOnlyCaretVisible="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-            <Button Content="{StaticResource GetHashFromID}" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
+            <Button Content="{StaticResource GetHashFromID}" Margin="10,10,10,10" MinWidth="80" MinHeight="36"
                 Command="{Binding RetrieveHashFromIDCommand}"/>
+            <TextBox Margin="10,10,10,10" MinWidth="540" MinHeight="30"
+            Text="{Binding SourceHash, Mode=OneWay}" IsReadOnlyCaretVisible="True" IsEnabled="False" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <TextBox Margin="10,10,10,10" MinWidth="600" MinHeight="30"
-            Text="{Binding SourceHash, Mode=OneWay}" IsReadOnlyCaretVisible="True" IsEnabled="False" />
         </StackPanel>
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>
@@ -48,23 +48,24 @@
             <xctk:WatermarkTextBox HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="10" AcceptsReturn="True"
                                        Text="{Binding EntryList}" MinHeight="100" Grid.Row="1" Grid.Column="0"/>
 
-            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button Content="{StaticResource SortButtonCaption}" HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
                 Command="{Binding SortPlayersCommand}"/>
             </StackPanel>
+
             <ListBox Margin="10,10,10,10" d:ItemsSource="{d:SampleData ItemCount=5}"
                  ItemsSource="{Binding SortedPlayersList}"  Grid.Column="1" Grid.Row="1"
                 />
+            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button Content="{StaticResource ShuffleButtonCaption}" HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
+                    Command="{Binding ShufflePlayersCommand}"/>
+            </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0">
                 <StackPanel Orientation="Horizontal" >
-                    <Button Content="{StaticResource ShuffleButtonCaption}" HorizontalAlignment="Left" Margin="10,10,10,10" MinWidth="100" MinHeight="36"
-                    Command="{Binding ShufflePlayersCommand}"/>
-                    <Button Content="TSV" Margin="10" Command="{Binding GetShuffledPlayersListTSVCommand}" MinWidth="60" MinHeight="36" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" >
+                    <Button Content="TSV" Margin="5,10" Command="{Binding GetShuffledPlayersListTSVCommand}" MinWidth="60" MinHeight="36" />
+                    <Button Content="Challonge" Margin="5,10" MinWidth="60" MinHeight="36" Command="{Binding ChallongeBulkEntryCommand}"/>
                     <xctk:WatermarkTextBox Margin="10" VerticalContentAlignment="Center" Watermark="トーナメントID" MinWidth="100" Text="{Binding TournamentID}" />
-                    <Button Content="Challonge" Margin="10" MinWidth="80" MinHeight="36" Command="{Binding ChallongeBulkEntryCommand}"/>
                 </StackPanel>
             </StackPanel>
             <ListBox  Margin="10,10,10,10" d:ItemsSource="{d:SampleData ItemCount=5}"
