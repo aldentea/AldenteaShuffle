@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Aldentea.AldenteaShuffle.ViewModels"
         xmlns:local="clr-namespace:Aldentea.AldenteaShuffle"
         mc:Ignorable="d"
-        Title="あるでん茶式シャッフル" Height="600" Width="900" d:FontSize="18" FontSize="{Binding FontSize}">
+        Title="あるでん茶式シャッフル" Height="600" Width="960" d:FontSize="18" FontSize="{Binding FontSize}">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
